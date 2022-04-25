@@ -1,6 +1,3 @@
-#ifndef MONITOR_H
-#define MONITOR_H
-
 #include "Arduino_FreeRTOS.h"
 #include "semphr.h"
 SemaphoreHandle_t MutexContext;
@@ -21,5 +18,3 @@ uint8_t get_valeu()
 {
     return placer;
 }
-
-#endif
