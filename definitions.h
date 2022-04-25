@@ -1,9 +1,11 @@
+#ifndef MONITOR_H
+#define MONITOR_H
+
 #include "Arduino_FreeRTOS.h"
 #include "semphr.h"
-
 SemaphoreHandle_t MutexContext;
 
-volatile uint8_t placer;
+static uint8_t placer;
 
 void start_table()
 {
@@ -19,3 +21,5 @@ uint8_t get_valeu()
 {
     return placer;
 }
+
+#endif
