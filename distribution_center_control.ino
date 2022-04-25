@@ -3,6 +3,9 @@
 #include "motor.h"
 
 TaskHandle_t ReaderHandler;
+TaskHandle_t MotorHandler;
+TaskHandle_t LazerHandler;
+TaskHandle_t MoveHandler;
 
 void setup()
 {
@@ -17,7 +20,7 @@ void setup()
     xTaskCreate(
         leitor_area, // Função
         "Leitor",    // Nome
-        100,         // Empilhamento
+        100,         // Empilhamento -- Armazenamento de memória
         NULL,        // Parametros
         1,           // Prioridade
         &ReaderHandler);

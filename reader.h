@@ -34,8 +34,5 @@ void leitor_area(void *args)
     xSemaphoreGive(MutexContext);
 }
 
-void leitor_setup()
-{
-}
 
 #endif
