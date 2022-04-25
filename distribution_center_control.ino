@@ -1,12 +1,12 @@
 
 #include "reader.h"
 #include "motor.h"
-#include "Arduino_FreeRTOS.h"
-#include "semphr.h"
+#include "definitions.h"
 
 int plus = 0;
 void setup()
 {
+
     Serial.begin(115200);
     leitor_setup();
 }

@@ -2,6 +2,7 @@
 #define READER_H
 
 // Bibliotecas
+#include "definitions.h"
 
 // Variáveis de ambiente
 #define T_READER 1000 / portTICK_PERIOD_MS
@@ -15,14 +16,17 @@
 
 void leitor_area(void *args)
 {
-
+    xSemaphoreTake(MutexContext, portMAX_DELAY);
     int base = random(4);
-    Serial.print(base);
+
+    blink_led(base);
+
+    xSemaphoreGive(MutexContext);
 }
 
 void blink_led(int response)
 {
-    int mock_reader = random(1000 / portTICK_PERIOD_MS)
+    int mock_reader = random(1000 / portTICK_PERIOD_MS);
 }
 
 void leitor_setup()
