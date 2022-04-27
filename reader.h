@@ -27,7 +27,7 @@ void leitor_area(void *args)
 
             digitalWrite(L_READER, LOW);
         }
-        xTaskNotifyGive(LazerHandler);
+        xTaskNotifyGive(MotorHandler);
         vTaskDelay(1000 / portTICK_PERIOD_MS); // Criar delay de leitura
                                                // ulTaskNotifyTake( pdTRUE, portMAX_DELAY );
     }

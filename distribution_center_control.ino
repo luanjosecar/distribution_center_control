@@ -2,7 +2,7 @@
 #include "reader.h"
 #include "lazer_sensor.h"
 //#include "distribution.h"
-//#include "motor.h"
+#include "motor.h"
 
 
 
@@ -32,15 +32,15 @@ void setup()
         NULL,            // Parametros
         1,            // Prioridade
         &LazerHandler);
-/*
+
     xTaskCreate(
-        check_sistem, // Função
+        change_position, // Função
         "Leitor 2",   // Nome
         100,          // Empilhamento -- Armazenamento de memória
-        0,            // Parametros
-        2,            // Prioridade
-        NULL);
-    
+        NULL,            // Parametros
+        1,            // Prioridade
+        &MotorHandler);
+   /*
     xTaskCreate(
         check_table, // Função
         "Mesa 1",   // Nome
