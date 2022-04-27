@@ -4,14 +4,17 @@
 //#include "distribution.h"
 //#include "motor.h"
 
-
+TaskHandle_t ReaderHandler;
+TaskHandle_t MotorHandler;
+TaskHandle_t LazerHandler;
+TaskHandle_t MoveHandler;
 
 void setup()
 {
     randomSeed(analogRead(A0)); // Criar números realmente aleatórios
 
     Serial.begin(115200);
-   
+    MutexContext = xSemaphoreCreateMutex();
     if (MutexContext == NULL)
     {
         Serial.print("Erro ao criar o Mutex \n");
@@ -20,18 +23,18 @@ void setup()
     xTaskCreate(
         leitor_area, // Função
         "Leitor",    // Nome
-        150,         // Empilhamento -- Armazenamento de memória
+        100,         // Empilhamento -- Armazenamento de memória
         NULL,        // Parametros
         1,           // Prioridade
         &ReaderHandler);
 
     xTaskCreate(
-        validate_lazer, // Função
+        check_sistem, // Função
         "Leitor 1",   // Nome
-        200,          // Empilhamento -- Armazenamento de memória
-        NULL,            // Parametros
-        1,            // Prioridade
-        &LazerHandler);
+        100,          // Empilhamento -- Armazenamento de memória
+        1,            // Parametros
+        2,            // Prioridade
+        NULL);
 /*
     xTaskCreate(
         check_sistem, // Função
