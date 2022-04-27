@@ -1,3 +1,5 @@
+// Biblioteca para variaveis de ambientes e funções globais
+
 #include "Arduino_FreeRTOS.h"
 #include "semphr.h"
 #include "queue.h"
@@ -6,19 +8,19 @@
 
 // Leituras do sistema
 
-#define READER_B 3
-#define PASS_1B 4
-#define PASS_2B 5
-#define EME_B 2
+#define READER_B 3 // Sensor de leitra do local
+#define PASS_1B 4 // Sensor lazer 1
+#define PASS_2B 5 // Sensor lazer 2
+#define EME_B 2 // Butão de emergência
 
-#define L_READER 8
-#define L1_PASS 7
-#define L2_PASS 6
-#define L_EME 8
+#define L_READER 8 // Led do leitor de local
+#define L1_PASS 7 // Led do lazer 1
+#define L2_PASS 6 // Led do lazer 2
+#define L_EME 8 // Led da emergência
 
 
 
-SemaphoreHandle_t MutexContext = xSemaphoreCreateMutex();
+SemaphoreHandle_t MutexContext = xSemaphoreCreateMutex(); 
 QueueHandle_t read_base = xQueueCreate(1, sizeof(uint8_t));
 
 TaskHandle_t ReaderHandler = NULL;
@@ -29,14 +31,13 @@ TaskHandle_t MoveHandler = NULL ;
 
 static volatile uint8_t placer;
 
-static uint8_t controler[SIZE];
+static volatile uint8_t controler[SIZE];
 
 void set_value(uint8_t pointer)
 {
    xSemaphoreTake(MutexContext, portMAX_DELAY);
-    
     placer = pointer;
-     xSemaphoreGive(MutexContext);
+    xSemaphoreGive(MutexContext);
 }
 
 uint8_t get_value()
@@ -68,3 +69,7 @@ void reset_control(uint8_t place)
     controler[place] = 0;
     xSemaphoreGive(MutexContext);
 }
+
+
+// Adicionar funções para a variavel de controle booleana
+// PASS

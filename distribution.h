@@ -13,3 +13,7 @@ void check_table(void *args)
         reset_control(params);
     }
 }
+
+
+// Verificar se o sistema está correto
+// Checar a forma de escrever a task para adapta-la ao correto

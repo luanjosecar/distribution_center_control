@@ -16,3 +16,5 @@ void print_data()
     Serial.print();
     Serial.print(F("\n\t\t---------------------\n\n"));
 }
+
+// Implementar a funções de modelo task para que ele seja executado a cada 10 segundos

@@ -49,3 +49,6 @@ void change_position(void *args)
 }
 
 #endif
+
+// Ajustar Delays para que o tempo de execução seja coerente
+// Ajustar também a deadline dele

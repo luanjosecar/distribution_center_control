@@ -42,9 +42,37 @@ void check_sistem_s2(void *args)
               vTaskDelay(random(1000) / portTICK_PERIOD_MS);
               digitalWrite(L2_PASS, LOW);
             }
+            else{
+                // Interupção do sistema
+            }
         }
 
         vTaskDelete(LazerSensor2);
+   
+}
+
+void check_sistem_s3(void *args)
+{
+    uint8_t param;
+
+        
+        param = get_value();
+        Serial.println(param);
+        if (digitalRead(PASS_3B))
+        {
+          if(param == 0){
+              add_control(param);
+              Serial.print("Adicionado Area ");
+              Serial.println(L3_PASS);
+              digitalWrite(L3_PASS, HIGH);
+              vTaskDelay(random(1000) / portTICK_PERIOD_MS);
+              digitalWrite(L3_PASS, LOW);
+            }
+          
+           
+        }
+        
+        vTaskDelete(LazerSensor1);
    
 }
 
@@ -68,9 +96,16 @@ for(;;){
         1,            // Prioridade
         &LazerSensor2);
         vTaskDelay(random(1000) / portTICK_PERIOD_MS);
-        xTaskNotifyGive(ReaderHandler);
+
+        // Criar Task de novo sensor assim como a handler dele
+    xTaskNotifyGive(ReaderHandler);
 }
 }
+
+
+
+// Ajustar o sistema para validar quando ele passar por um dos sensores lazer
+
 
 /*
 void check_sistem_s2(void *args)
@@ -98,3 +133,5 @@ void check_sistem_s2(void *args)
     }
    
 }*/
+
+

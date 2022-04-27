@@ -40,6 +40,8 @@ void setup()
         NULL,            // Parametros
         1,            // Prioridade
         &MotorHandler);
+
+        //Ajustar a task da mesa para que ela rode sem problemas
    /*
     xTaskCreate(
         check_table, // Função
@@ -49,6 +51,8 @@ void setup()
         1,            // Prioridade
         NULL);
 */
+
+    // Criar interupção
     vTaskStartScheduler();
 }
 
