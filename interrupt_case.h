@@ -13,6 +13,7 @@ void start_interrupt(void *args)
             if (digitalRead(EME_B))
             {
                 xSemaphoreGive(MutexContext);
+                set_value(2);
                 xTaskNotifyGive(MotorHandler);
                 break;
             }

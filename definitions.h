@@ -3,7 +3,9 @@
 #include "semphr.h"
 #include "queue.h"
 #include "task.h"
+
 #define SIZE 2
+#define MAX_VALUE 3
 
 // Leituras do sistema
 
