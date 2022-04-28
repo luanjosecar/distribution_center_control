@@ -14,6 +14,7 @@ void leitor_area(void *args)
             if (get_flagpass())
             {
                 // Beggin interrupt
+                xTaskNotifyGive(InteruptHandler);
             }
             uint8_t base = random(3);
             set_value(base);

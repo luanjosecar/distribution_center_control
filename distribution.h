@@ -1,7 +1,5 @@
 //#include "definitions.h"
 
-#define MAX_VALUE 3
-
 TaskHandle_t TableSensor1 = NULL;
 TaskHandle_t TableSensor2 = NULL;
 

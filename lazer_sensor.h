@@ -23,6 +23,7 @@ void check_sistem_s1(void *args)
         else
         {
             // Acionar um interupt
+            xTaskNotifyGive(InteruptHandler);
         }
     }
 
@@ -48,6 +49,7 @@ void check_sistem_s2(void *args)
         else
         {
             // Interupção do sistema
+            xTaskNotifyGive(InteruptHandler);
         }
     }
 
@@ -70,6 +72,10 @@ void check_sistem_s3(void *args)
             digitalWrite(L3_PASS, HIGH);
             vTaskDelay(random(1000) / portTICK_PERIOD_MS);
             digitalWrite(L3_PASS, LOW);
+        }
+        else
+        {
+            xTaskNotifyGive(InteruptHandler);
         }
     }
 
