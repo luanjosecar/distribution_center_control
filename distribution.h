@@ -31,6 +31,9 @@ void check_table(void *args)
 {
     for (;;)
     {
+
+        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+
         xTaskCreate(
             verify_container_1, // Função
             "Mesa 1",           // Nome
@@ -46,6 +49,8 @@ void check_table(void *args)
             1,                  // Prioridade
             &TableSensor2);
 
+        set_flagpass(false);
+        xTaskNotifyGive(ReaderHandler);
         // Valida sensor
         vTaskDelay(random(1000) / portTICK_PERIOD_MS);
     }

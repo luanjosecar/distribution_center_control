@@ -2,7 +2,7 @@
 #define READER_H
 
 // Funções
-// 
+//
 void leitor_area(void *args)
 {
 
@@ -10,6 +10,11 @@ void leitor_area(void *args)
     {
         if (digitalRead(READER_B))
         {
+
+            if (get_flagpass())
+            {
+                // Beggin interrupt
+            }
             uint8_t base = random(3);
             set_value(base);
 
@@ -17,6 +22,7 @@ void leitor_area(void *args)
             vTaskDelay(random(1000) / portTICK_PERIOD_MS); // Criar delay de leitura
 
             digitalWrite(L_READER, LOW);
+            set_flagpass(true);
         }
         xTaskNotifyGive(MotorHandler);
         vTaskDelay(1000 / portTICK_PERIOD_MS); // Criar delay de leitura

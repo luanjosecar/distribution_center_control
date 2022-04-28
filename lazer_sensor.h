@@ -20,6 +20,10 @@ void check_sistem_s1(void *args)
             vTaskDelay(random(1000) / portTICK_PERIOD_MS);
             digitalWrite(L1_PASS, LOW);
         }
+        else
+        {
+            // Acionar um interupt
+        }
     }
 
     vTaskDelete(LazerSensor1);
@@ -102,35 +106,6 @@ void validate_lazer(void *args)
         vTaskDelay(random(1000) / portTICK_PERIOD_MS);
 
         // Criar Task de novo sensor assim como a handler dele
-        xTaskNotifyGive(ReaderHandler);
+        xTaskNotifyGive(MoveHandler);
     }
 }
-
-// Ajustar o sistema para validar quando ele passar por um dos sensores lazer
-
-/*
-void check_sistem_s2(void *args)
-{
-    uint8_t param;
-    for (;;)
-    {
-        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-        param = get_value();
-        if (digitalRead(PASS_1B))
-        {
-          if(param == 0){
-              add_control(param);
-              Serial.print("Adicionado Area ");
-              Serial.println(L1_PASS);
-              digitalWrite(L1_PASS, HIGH);
-              vTaskDelay(random(1000) / portTICK_PERIOD_MS);
-              digitalWrite(L1_PASS, LOW);
-            }
-
-
-        }
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
-        xTaskNotifyGive(ReaderHandler);
-    }
-
-}*/
