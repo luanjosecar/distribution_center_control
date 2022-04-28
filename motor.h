@@ -42,7 +42,9 @@ void change_position(void *args)
 
     //Serial.print("pass: ");
    // Serial.print(pass);
+   
    vTaskDelay(1000 / portTICK_PERIOD_MS);
+   
    xTaskNotifyGive(LazerHandler);
     //delay(2000);
   }

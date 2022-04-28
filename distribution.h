@@ -48,6 +48,7 @@ void check_table(void *args)
             &TableSensor2);
 
         set_flagpass(false);
+        
         // xTaskNotifyGive(ReaderHandler);
         //  Valida sensor
         vTaskDelay(random(1000) / portTICK_PERIOD_MS);

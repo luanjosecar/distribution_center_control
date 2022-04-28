@@ -36,6 +36,16 @@ static volatile bool is_processing;
 static volatile uint8_t controler[SIZE];
 static volatile boolean pass;
 
+
+void stat_variables(){
+  placer = -1;
+  is_processing = false;
+  controler[0] =0;
+  controler[1]=0;
+  pass = false;
+  
+}
+
 void set_value(uint8_t pointer)
 {
     xSemaphoreTake(MutexContext, portMAX_DELAY);

@@ -6,7 +6,6 @@ void start_interrupt(void *args)
     for (;;)
     {
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-
         xSemaphoreTake(MutexContext, portMAX_DELAY);
         for (;;)
         {

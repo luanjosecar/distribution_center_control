@@ -23,7 +23,7 @@ void check_sistem_s1(void *args)
         else
         {
             // Acionar um interupt
-            xTaskNotifyGive(InteruptHandler);
+            //xTaskNotifyGive(InteruptHandler);
         }
     }
 
@@ -49,7 +49,7 @@ void check_sistem_s2(void *args)
         else
         {
             // Interupção do sistema
-            xTaskNotifyGive(InteruptHandler);
+            //xTaskNotifyGive(InteruptHandler);
         }
     }
 
@@ -75,7 +75,7 @@ void check_sistem_s3(void *args)
         }
         else
         {
-            xTaskNotifyGive(InteruptHandler);
+            //xTaskNotifyGive(InteruptHandler);
         }
     }
 
@@ -109,6 +109,7 @@ void validate_lazer(void *args)
             NULL,            // Parametros
             1,               // Prioridade
             &LazerSensor3);
+            //print_data(false,"Verifica Sensores");
         vTaskDelay(random(1000) / portTICK_PERIOD_MS);
 
         // Criar Task de novo sensor assim como a handler dele
