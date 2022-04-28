@@ -1,6 +1,7 @@
 
 TaskHandle_t LazerSensor1 = NULL;
 TaskHandle_t LazerSensor2 = NULL;
+TaskHandle_t LazerSensor3 = NULL;
 
 void check_sistem_s1(void *args)
 {
@@ -72,7 +73,7 @@ void check_sistem_s3(void *args)
            
         }
         
-        vTaskDelete(LazerSensor1);
+        vTaskDelete(LazerSensor3);
    
 }
 
@@ -88,14 +89,32 @@ for(;;){
         NULL,            // Parametros
         1,            // Prioridade
         &LazerSensor1);
+    vTaskDelay(random(1000) / portTICK_PERIOD_MS);
+    
     xTaskCreate(
         check_sistem_s2, // Função
-        "Leitor 1",   // Nome
+        "Leitor 2",   // Nome
+        80,          // Empilhamento -- Armazenamento de memória
+        NULL,            // Parametros
+        1,            // Prioridade
+        &LazerSensor2);
+
+    vTaskDelay(random(1000) / portTICK_PERIOD_MS);
+
+   
+    xTaskCreate(
+        check_sistem_s3, // Função
+        "Leitor 3",   // Nome
         80,          // Empilhamento -- Armazenamento de memória
         NULL,            // Parametros
         1,            // Prioridade
         &LazerSensor2);
         vTaskDelay(random(1000) / portTICK_PERIOD_MS);
+
+
+        
+        
+
 
         // Criar Task de novo sensor assim como a handler dele
     xTaskNotifyGive(ReaderHandler);
@@ -133,5 +152,3 @@ void check_sistem_s2(void *args)
     }
    
 }*/
-
-
