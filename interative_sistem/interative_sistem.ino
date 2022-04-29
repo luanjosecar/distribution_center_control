@@ -1,9 +1,15 @@
+#define READER 9
+#define L1 8
+#define L2 7 
+#define L3 6 
+#define EME 5
+#define ACTIVATE 10
 
 void print_menu()
 {
     Serial.println("------------------------------------");
     Serial.println("Escolha uma das opções para o sistema");
-    Serial.println("    1          2         3      9(interupt) ");
+    Serial.println("    0          1         2      9(interupt) ");
     Serial.println("------------------------------------");
 }
 
@@ -17,9 +23,9 @@ void loop()
 {
     delay(3000);
     Serial.println("Caixa entrando no sistema");
-    digitalWrite(9, HIGH);
+    digitalWrite(READER, HIGH);
     delay(1);
-    digitalWrite(9, LOW);
+    digitalWrite(READER, LOW);
     delay(4000);
     print_menu();
     int base;
@@ -28,43 +34,49 @@ void loop()
         base = Serial.parseInt();
     if (base == 0)
     {
-        Serial.print("Ativando sensor da área 1");
-        digitalWrite(8, HIGH);
+        Serial.println("Ativando sensor da área 0");
+        digitalWrite(L1, HIGH);
         delay(10);
-        digitalWrite(8, LOW);
+        digitalWrite(L1, LOW);
     }
     if (base == 1)
     {
-        Serial.print("Ativando sensor da área 2");
-        digitalWrite(7, HIGH);
+        Serial.println("Ativando sensor da área 1");
+        digitalWrite(L2, HIGH);
         delay(10);
-        digitalWrite(7, LOW);
+        digitalWrite(L2, LOW);
     }
     if (base == 2)
     {
-        Serial.print("Ativando sensor da área 3");
-        digitalWrite(6, HIGH);
+        Serial.print("Ativando sensor da área 2");
+        digitalWrite(L3, HIGH);
         delay(10);
-        digitalWrite(6, LOW);
+        digitalWrite(L3, LOW);
     }
     if(base == 9) {
       Serial.println("Iniciando interupção");
-      
-      while(base != 0){
-        Serial.println("Digite 0 para finaliza-la");
+        digitalWrite(EME, HIGH);
+        delay(200);
+        digitalWrite(EME, LOW);
+      while(base != 8){
+        Serial.println("Digite 8 para finaliza-la");
           while (Serial.available()== 0)
           {}
           
           base = Serial.parseInt();
       }
       Serial.println("Reiniciando o Sistema");
+      
     }
-    delay(3000);
+    
     while (true)
     {
-        if (digitalRead(10))
+        if (digitalRead(ACTIVATE))
         {
             break;
+        }
+        if(base == 8){
+          break;
         }
         delay(10);
     }
