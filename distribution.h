@@ -54,12 +54,12 @@ void check_table(void *args)
             1,                  // Prioridade
             &TableSensor2);
 
-        // set_flagpass(false);
-
-        // Valida sensor
 
         Serial.println("Passaram os carregamentos");
 
+        set_value(-1);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        Serial.println("Liberando leitor");
         xTaskNotifyGive(ReaderHandler);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }

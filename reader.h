@@ -11,7 +11,16 @@ void leitor_area(void *args)
       bool base = get_flagpass();
        if (get_flagpass())
        {
-           Serial.print("Area de interrupt");
+        if (digitalRead(READER_B)){
+          // Interupt
+          Serial.println("Area de interrupt");
+        }
+        
+        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+        set_flagpass(false);
+        set_value(-1);
+        Serial.println("Retornando a leitura");
+        continue;
                 // Beggin interrupt
                 //xTaskNotifyGive(InteruptHandler);
                 //Serial.println("interupção ativada");
@@ -30,12 +39,15 @@ void leitor_area(void *args)
             set_flagpass(true);
             Serial.print("Leitura Para a árae : ");
             Serial.println(base);
+            xTaskNotifyGive(MotorHandler);
+        }
+        else{
+          Serial.println("Aguardando leitura");
         }
         
-        xTaskNotifyGive(MotorHandler);
         
         vTaskDelay(1000 / portTICK_PERIOD_MS); // Criar delay de leitura
-        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+        
           
       //print_data(false,"Leitura Terminada");                                         // ulTaskNotifyTake( pdTRUE, portMAX_DELAY );
     }

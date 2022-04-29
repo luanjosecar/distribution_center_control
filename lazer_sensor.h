@@ -1,94 +1,105 @@
 
-TaskHandle_t LazerSensor1 = NULL;
-TaskHandle_t LazerSensor2 = NULL;
-TaskHandle_t LazerSensor3 = NULL;
-
 void check_sistem_s1(void *args)
 {
     uint8_t param;
-
-    param = get_value();
-    
-    if (digitalRead(PASS_1B))
+    for (;;)
     {
-        if (param == 0)
+        param = get_value();
+        if (digitalRead(PASS_1B))
         {
-            //add_control(param);
-            add_mesa1();
-            Serial.print("Adicionado Area ");
-            Serial.println(L1_PASS);
-            digitalWrite(L1_PASS, HIGH);
-            vTaskDelay(random(1000) / portTICK_PERIOD_MS);
-            digitalWrite(L1_PASS, LOW);
+            if (param == 0)
+            {
+                Serial.print("Adicionado Area 1");
+                digitalWrite(L1_PASS, HIGH);
+                add_mesa1();
+                vTaskDelay(random(500) / portTICK_PERIOD_MS);
+                digitalWrite(L1_PASS, LOW);
+            }
+            else
+            {
+                // Interupção do sistema
+                // xTaskNotifyGive(InteruptHandler);
+            }
+            
+            xTaskNotifyGive(MoveHandler);
+            vTaskDelay(2000 / portTICK_PERIOD_MS);
+            
+            
         }
-        else
-        {
-            // Acionar um interupt
-            //xTaskNotifyGive(InteruptHandler);
-        }
+        Serial.print(" Aguardando Leitor 1 ");
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
-
-    vTaskDelete(LazerSensor1);
 }
 
 void check_sistem_s2(void *args)
 {
     uint8_t param;
-
-    param = get_value();
-    if (digitalRead(PASS_2B))
+    for (;;)
     {
-        if (param == 1)
+        param = get_value();
+        if (digitalRead(PASS_2B))
         {
-            //add_control(param);
-            Serial.print("Adicionado Area ");
-            Serial.println(L2_PASS);
-            digitalWrite(L2_PASS, HIGH);
-            vTaskDelay(random(1000) / portTICK_PERIOD_MS);
-            digitalWrite(L2_PASS, LOW);
+            if (param == 1)
+            {
+                Serial.print("Adicionado Area 2");
+                digitalWrite(L2_PASS, HIGH);
+                add_mesa2();
+                vTaskDelay(random(500) / portTICK_PERIOD_MS);
+                digitalWrite(L2_PASS, LOW);
+            }
+            else
+            {
+                // Interupção do sistema
+                // xTaskNotifyGive(InteruptHandler);
+            }
+            
+            xTaskNotifyGive(MoveHandler);
+            vTaskDelay(2000 / portTICK_PERIOD_MS);
+            
         }
-        else
-        {
-            // Interupção do sistema
-            //xTaskNotifyGive(InteruptHandler);
-        }
+        Serial.print(" Aguardando Leitor 2 ");
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
-
-    vTaskDelete(LazerSensor2);
 }
 
 void check_sistem_s3(void *args)
 {
     uint8_t param;
-
-    param = get_value();
-    
-    if (digitalRead(PASS_3B))
+    for (;;)
     {
-        if (param == 0)
+        param = get_value();
+        if (digitalRead(PASS_3B))
         {
-            //add_control(param);
-            Serial.print("Adicionado Area ");
-            Serial.println(L3_PASS);
-            digitalWrite(L3_PASS, HIGH);
-            vTaskDelay(random(1000) / portTICK_PERIOD_MS);
-            digitalWrite(L3_PASS, LOW);
+            if (param == 1)
+            {
+                Serial.print("Passando para área de retorno ");
+                
+                digitalWrite(L3_PASS, HIGH);
+                vTaskDelay(random(500) / portTICK_PERIOD_MS);
+                digitalWrite(L3_PASS, LOW);
+            }
+            else
+            {
+                // Interupção do sistema
+                // xTaskNotifyGive(InteruptHandler);
+            }
+            
+            xTaskNotifyGive(MoveHandler);
+            vTaskDelay(2000 / portTICK_PERIOD_MS);
+            
         }
-        else
-        {
-            //xTaskNotifyGive(InteruptHandler);
-        }
+        Serial.print(" Aguardando Leitor 3 ");
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
-
-    vTaskDelete(LazerSensor3);
 }
 
 void validate_lazer(void *args)
 {
     for (;;)
     {
-
-        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+        
+        Serial.println("Iniciando Sensores");
+        // ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
         xTaskCreate(
             check_sistem_s1, // Função
             "Leitor 1",      // Nome
@@ -110,11 +121,12 @@ void validate_lazer(void *args)
             NULL,            // Parametros
             1,               // Prioridade
             &LazerSensor3);
-            //print_data(false,"Verifica Sensores");
-        vTaskDelay(random(1000) / portTICK_PERIOD_MS);
+        // print_data(false,"Verifica Sensores");
+        
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+
+        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 
         // Criar Task de novo sensor assim como a handler dele
-        set_flagpass(false);
-        xTaskNotifyGive(MoveHandler);
-    }
+        }
 }

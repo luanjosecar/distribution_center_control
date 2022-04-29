@@ -16,38 +16,38 @@ Servo chooseGate;
 
 void change_position(void *args)
 {
-  chooseGate.attach(9);
-  for(;;){
+  chooseGate.attach(MOTOR);
+  for (;;)
+  {
 
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-    p=get_value();
-    //set_value(2);
-   // Serial.print("p:");
-   // Serial.println(p);
-    
+    p = get_value();
+    // set_value(2);
+    // Serial.print("p:");
+    // Serial.println(p);
+
     if (p == 0)
     {
-        chooseGate.write(0);
-        //pass=true;
+      chooseGate.write(0);
+      // pass=true;
     }
     else if (p == 1)
     {
-        chooseGate.write(90);
-        //pass=true;
+      chooseGate.write(90);
+      // pass=true;
     }
     else
     {
-        chooseGate.write(180);
+      chooseGate.write(180);
     }
 
-    //Serial.print("pass: ");
-   // Serial.print(pass);
-   Serial.println("Passagem Motor");
-   
-   
-   xTaskNotifyGive(LazerHandler);
-   vTaskDelay(1000 / portTICK_PERIOD_MS);
-    //delay(2000);
+    // Serial.print("pass: ");
+    // Serial.print(pass);
+    Serial.println("Passagem Motor");
+
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    // xTaskNotifyGive(LazerHandler);
+    // delay(2000);
   }
 }
 

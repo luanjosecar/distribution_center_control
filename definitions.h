@@ -31,23 +31,27 @@ TaskHandle_t LazerHandler = NULL;
 TaskHandle_t MoveHandler = NULL;
 TaskHandle_t InteruptHandler = NULL;
 
+TaskHandle_t LazerSensor1 = NULL;
+TaskHandle_t LazerSensor2 = NULL;
+TaskHandle_t LazerSensor3 = NULL;
+
 static volatile uint8_t placer;
 static volatile bool pass;
 static volatile uint8_t mesa_1;
 static volatile uint8_t mesa_2;
 
-void stat_variables(){
-  mesa_1 = 0;
-  mesa_2 = 0;
-  placer = -1;
-  pass = false;
-  
+void stat_variables()
+{
+    mesa_1 = 0;
+    mesa_2 = 0;
+    placer = -1;
+    pass = false;
 }
 
 void add_mesa1()
 {
     xSemaphoreTake(MutexContext, portMAX_DELAY);
-    mesa_1 ++;
+    mesa_1++;
     xSemaphoreGive(MutexContext);
 }
 
@@ -63,14 +67,14 @@ uint8_t get_mesa1()
 void reset_mesa_1()
 {
     xSemaphoreTake(MutexContext, portMAX_DELAY);
-    mesa_1 =0;
+    mesa_1 = 0;
     xSemaphoreGive(MutexContext);
 }
 
 void add_mesa2()
 {
     xSemaphoreTake(MutexContext, portMAX_DELAY);
-    mesa_2 ++;
+    mesa_2++;
     xSemaphoreGive(MutexContext);
 }
 
@@ -83,11 +87,10 @@ uint8_t get_mesa2()
     return base;
 }
 
-
 void reset_mesa_2()
 {
     xSemaphoreTake(MutexContext, portMAX_DELAY);
-    mesa_2 =0;
+    mesa_2 = 0;
     xSemaphoreGive(MutexContext);
 }
 void set_value(uint8_t pointer)

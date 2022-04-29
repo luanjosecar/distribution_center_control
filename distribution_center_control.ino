@@ -24,7 +24,6 @@ void setup()
         NULL,        // Parametros
         1,           // Prioridade
         &ReaderHandler);
-
    xTaskCreate(
         change_position, // Função
         "Motor",      // Nome
@@ -32,16 +31,31 @@ void setup()
         NULL,            // Parametros
         1,               // Prioridade
         &MotorHandler);
-        
+
+
       xTaskCreate(
-        validate_lazer, // Função
-        "Passagem",     // Nome
-        100,            // Empilhamento -- Armazenamento de memória
+        check_sistem_s1, // Função
+        "Passagem 1",     // Nome
+        80,            // Empilhamento -- Armazenamento de memória
         NULL,           // Parametros
         1,              // Prioridade
-        &LazerHandler);
+        &LazerSensor1);
+      xTaskCreate(
+        check_sistem_s2, // Função
+        "Passagem 2",     // Nome
+        80,            // Empilhamento -- Armazenamento de memória
+        NULL,           // Parametros
+        1,              // Prioridade
+        &LazerSensor2);
+       xTaskCreate(
+        check_sistem_s3, // Função
+        "Passagem 1",     // Nome
+        80,            // Empilhamento -- Armazenamento de memória
+        NULL,           // Parametros
+        1,              // Prioridade
+        &LazerSensor3);
         
-    xTaskCreate(
+      xTaskCreate(
         check_table, // Função
         "Mesas",    // Nome
         100,         // Empilhamento -- Armazenamento de memória
@@ -50,7 +64,12 @@ void setup()
         &MoveHandler);
  
 
-/*    
+/*   
+
+        
+  
+
+ 
 
 
  
