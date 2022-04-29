@@ -13,7 +13,8 @@ void check_sistem_s1(void *args)
     {
         if (param == 0)
         {
-            add_control(param);
+            //add_control(param);
+            add_mesa1();
             Serial.print("Adicionado Area ");
             Serial.println(L1_PASS);
             digitalWrite(L1_PASS, HIGH);
@@ -39,7 +40,7 @@ void check_sistem_s2(void *args)
     {
         if (param == 1)
         {
-            add_control(param);
+            //add_control(param);
             Serial.print("Adicionado Area ");
             Serial.println(L2_PASS);
             digitalWrite(L2_PASS, HIGH);
@@ -66,7 +67,7 @@ void check_sistem_s3(void *args)
     {
         if (param == 0)
         {
-            add_control(param);
+            //add_control(param);
             Serial.print("Adicionado Area ");
             Serial.println(L3_PASS);
             digitalWrite(L3_PASS, HIGH);

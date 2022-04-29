@@ -32,18 +32,64 @@ TaskHandle_t MoveHandler = NULL;
 TaskHandle_t InteruptHandler = NULL;
 
 static volatile uint8_t placer;
-static volatile uint8_t controler[SIZE];
 static volatile bool pass;
-
+static volatile uint8_t mesa_1;
+static volatile uint8_t mesa_2;
 
 void stat_variables(){
+  mesa_1 = 0;
+  mesa_2 = 0;
   placer = -1;
-  controler[0] =0;
-  controler[1]=0;
   pass = false;
   
 }
 
+void add_mesa1()
+{
+    xSemaphoreTake(MutexContext, portMAX_DELAY);
+    mesa_1 ++;
+    xSemaphoreGive(MutexContext);
+}
+
+uint8_t get_mesa1()
+{
+    uint8_t base;
+    xSemaphoreTake(MutexContext, portMAX_DELAY);
+    base = mesa_1;
+    xSemaphoreGive(MutexContext);
+    return base;
+}
+
+void reset_mesa_1()
+{
+    xSemaphoreTake(MutexContext, portMAX_DELAY);
+    mesa_1 =0;
+    xSemaphoreGive(MutexContext);
+}
+
+void add_mesa2()
+{
+    xSemaphoreTake(MutexContext, portMAX_DELAY);
+    mesa_2 ++;
+    xSemaphoreGive(MutexContext);
+}
+
+uint8_t get_mesa2()
+{
+    uint8_t base;
+    xSemaphoreTake(MutexContext, portMAX_DELAY);
+    base = mesa_2;
+    xSemaphoreGive(MutexContext);
+    return base;
+}
+
+
+void reset_mesa_2()
+{
+    xSemaphoreTake(MutexContext, portMAX_DELAY);
+    mesa_2 =0;
+    xSemaphoreGive(MutexContext);
+}
 void set_value(uint8_t pointer)
 {
     xSemaphoreTake(MutexContext, portMAX_DELAY);
@@ -58,27 +104,6 @@ uint8_t get_value()
     base = placer;
     xSemaphoreGive(MutexContext);
     return base;
-}
-
-void add_control(uint8_t place)
-{
-    xSemaphoreTake(MutexContext, portMAX_DELAY);
-    controler[place]++;
-    xSemaphoreGive(MutexContext);
-}
-
-uint8_t get_control(uint8_t place)
-{
-    xSemaphoreTake(MutexContext, portMAX_DELAY);
-    return controler[place];
-    xSemaphoreGive(MutexContext);
-}
-
-void reset_control(uint8_t place)
-{
-    xSemaphoreTake(MutexContext, portMAX_DELAY);
-    controler[place] = 0;
-    xSemaphoreGive(MutexContext);
 }
 
 void set_flagpass(bool flag)
