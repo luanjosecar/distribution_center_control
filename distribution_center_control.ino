@@ -1,5 +1,4 @@
 #include "definitions.h"
-#include "logger.h"
 #include "interrupt_case.h"
 #include "reader.h"
 #include "lazer_sensor.h"

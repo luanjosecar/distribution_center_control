@@ -26,7 +26,7 @@ void check_sistem_s1(void *args)
             
             
         }
-        Serial.print(" Aguardando Leitor 1 ");
+        //Serial.print(" Aguardando Leitor 1 ");
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
@@ -57,7 +57,7 @@ void check_sistem_s2(void *args)
             vTaskDelay(2000 / portTICK_PERIOD_MS);
             
         }
-        Serial.print(" Aguardando Leitor 2 ");
+        //Serial.print(" Aguardando Leitor 2 ");
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
@@ -88,7 +88,7 @@ void check_sistem_s3(void *args)
             vTaskDelay(2000 / portTICK_PERIOD_MS);
             
         }
-        Serial.print(" Aguardando Leitor 3 ");
+        //Serial.print(" Aguardando Leitor 3 ");
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }

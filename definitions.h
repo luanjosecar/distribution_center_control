@@ -21,9 +21,10 @@
 #define L3_PASS 10 // Led do Lazer 3
 #define L_EME 8    // Led da emergência
 #define MOTOR 11   // Motor
+#define RELEASE 12 // Libera o sistema
+
 
 SemaphoreHandle_t MutexContext = xSemaphoreCreateMutex();
-QueueHandle_t read_base = xQueueCreate(1, sizeof(uint8_t));
 
 TaskHandle_t ReaderHandler = NULL;
 TaskHandle_t MotorHandler = NULL;

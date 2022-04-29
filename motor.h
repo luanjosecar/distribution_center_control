@@ -41,10 +41,10 @@ void change_position(void *args)
       chooseGate.write(180);
     }
 
-    // Serial.print("pass: ");
-    // Serial.print(pass);
     Serial.println("Passagem Motor");
-
+    Serial.println("Aguardando resposta dos sensores");
+    Serial.print("Porta de leitura pelo motor : ");
+    Serial.println(p);
     vTaskDelay(1000 / portTICK_PERIOD_MS);
     // xTaskNotifyGive(LazerHandler);
     // delay(2000);

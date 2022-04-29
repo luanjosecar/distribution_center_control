@@ -60,6 +60,11 @@ void check_table(void *args)
         set_value(-1);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
         Serial.println("Liberando leitor");
+        
+        digitalWrite(RELEASE, HIGH);
+        vTaskDelay(10/portTICK_PERIOD_MS);
+        digitalWrite(RELEASE, LOW);
+        
         xTaskNotifyGive(ReaderHandler);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }

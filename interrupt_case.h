@@ -28,6 +28,8 @@ void start_interrupt(void *args)
                 xSemaphoreGive(MutexContext);
                 set_eme_status(false);
                 xTaskNotifyGive(MotorHandler);
+                vTaskDelay(1000 / portTICK_PERIOD_MS);
+                xTaskNotifyGive(MoveHandler);
             }
         }
     
