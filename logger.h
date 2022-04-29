@@ -1,6 +1,6 @@
 
 
-void print_data(void *args)
+void print_data(void *args) //Log para acompanhamento da execução das tarefas
 {
   for(;;){
         Serial.write(27);

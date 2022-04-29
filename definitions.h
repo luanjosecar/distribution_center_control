@@ -34,7 +34,7 @@ TaskHandle_t InteruptHandler = NULL; //Tarefa de Interrupção
 
 static volatile uint8_t placer; // Número que define o destino da caixa (A,B ou C)
 static volatile uint8_t controler[SIZE]; 
-static volatile bool pass;
+static volatile bool pass; //Objeto alcançou o final do ciclo
 
 
 void stat_variables(){
@@ -45,14 +45,14 @@ void stat_variables(){
   
 }
 
-void set_value(uint8_t pointer)
+void set_value(uint8_t pointer) //Define o valor lido no objeto a ser transportado
 {
     xSemaphoreTake(MutexContext, portMAX_DELAY);
     placer = pointer;
     xSemaphoreGive(MutexContext);
 }
 
-uint8_t get_value()
+uint8_t get_value() //Pega o valor ligo no objeto a ser transportado
 {
     uint8_t base;
     xSemaphoreTake(MutexContext, portMAX_DELAY);
@@ -82,14 +82,14 @@ void reset_control(uint8_t place)
     xSemaphoreGive(MutexContext);
 }
 
-void set_flagpass(bool flag)
+void set_flagpass(bool flag) //Seta se o objeto passou pela caixa
 {
     xSemaphoreTake(MutexContext, portMAX_DELAY);
     pass = flag;
     xSemaphoreGive(MutexContext);
 }
 
-bool get_flagpass()
+bool get_flagpass()//Pega se o objeto passou pela caixa
 {
     boolean flag;
     xSemaphoreTake(MutexContext, portMAX_DELAY);

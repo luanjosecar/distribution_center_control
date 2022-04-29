@@ -28,7 +28,7 @@ void leitor_area(void *args)
 
             digitalWrite(L_READER, LOW);
             set_flagpass(true);
-            Serial.print("Leitura Para a árae : ");
+            Serial.print("Leitura Para a área : ");
             Serial.println(base);
         }
         

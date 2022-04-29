@@ -1,7 +1,7 @@
 //#include "definitions.h"
 
-TaskHandle_t TableSensor1 = NULL;
-TaskHandle_t TableSensor2 = NULL;
+TaskHandle_t TableSensor1 = NULL; // Sensor da primeira mesa
+TaskHandle_t TableSensor2 = NULL; // Sensor da segunda mesa
 
 void verify_container_1(void *args)
 {

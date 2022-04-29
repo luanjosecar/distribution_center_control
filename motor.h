@@ -7,23 +7,20 @@
 // Variáveis de ambiente
 #define T_READER 1000 / portTICK_PERIOD_MS // delay
 
-uint8_t p;
+uint8_t p; //Valor que define a posição para qual o motor deve girar
 
-Servo chooseGate;
+Servo chooseGate; //Declaração do servo motor
 // Hardware
 
 // Funções
 
-void change_position(void *args)
+void change_position(void *args) // Muda a posição do servo de acordo com a 
 {
   chooseGate.attach(9);
   for(;;){
 
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-    p=get_value();
-    //set_value(2);
-   // Serial.print("p:");
-   // Serial.println(p);
+    p=get_value(); // Tem acesso ao valor da porta a qual o objeto deve ser destinado
     
     if (p == 0)
     {

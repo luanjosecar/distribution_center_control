@@ -52,31 +52,6 @@ void setup()
         &MoveHandler);
  
 
-/*    
-
-
- 
-
-    // Ajustar a task da mesa para que ela rode sem problemas
-
-
-    xTaskCreate(
-        start_interrupt, // Função
-        "Mesa 1",        // Nome
-        100,             // Empilhamento -- Armazenamento de memória
-        0,               // Parametros
-        2,               // Prioridade
-        &InteruptHandler);
-*/
-/*
-    xTaskCreate(
-        print_data, // Função
-        "Logger",    // Nome
-        80,         // Empilhamento -- Armazenamento de memória
-        NULL,        // Parametros
-        0,           // Prioridade
-        NULL);
-*/
     // Criar interupção
     vTaskStartScheduler();
 }
