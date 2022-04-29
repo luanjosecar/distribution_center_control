@@ -10,12 +10,14 @@ void setup()
 {
     randomSeed(analogRead(A0)); // Criar números realmente aleatórios
 
-    Serial.begin(115200);
+    Serial.begin(115200); // Conexão Serial
     stat_variables();
     if (MutexContext == NULL)
     {
         Serial.print("Erro ao criar o Mutex \n");
     }
+
+//Insere tarefas na lista de aptos
 
     xTaskCreate(
         leitor_area, // Função

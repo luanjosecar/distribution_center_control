@@ -10,29 +10,30 @@
 // Leituras do sistema
 
 #define READER_B 3 // Sensor de leitura do local
-#define PASS_1B 4  // Sensor lazer 1
-#define PASS_2B 5  // Sensor lazer 2
-#define PASS_3B 9  // Sensor lazer 3
+#define PASS_1B 4  // Sensor laser 1
+#define PASS_2B 5  // Sensor laser 2
+#define PASS_3B 9  // Sensor laser 3
 #define EME_B 2    // Butão de emergência
 
 #define L_READER 8 // Led do leitor de local
-#define L1_PASS 7  // Led do lazer 1
-#define L2_PASS 6  // Led do lazer 2
-#define L3_PASS 10 // Led do Lazer 3
+#define L1_PASS 7  // Led do laser 1
+#define L2_PASS 6  // Led do laser 2
+#define L3_PASS 10 // Led do Laser 3
 #define L_EME 8    // Led da emergência
 #define MOTOR 11   // Motor
 
-SemaphoreHandle_t MutexContext = xSemaphoreCreateMutex();
-QueueHandle_t read_base = xQueueCreate(1, sizeof(uint8_t));
 
-TaskHandle_t ReaderHandler = NULL;
-TaskHandle_t MotorHandler = NULL;
-TaskHandle_t LazerHandler = NULL;
-TaskHandle_t MoveHandler = NULL;
-TaskHandle_t InteruptHandler = NULL;
+SemaphoreHandle_t MutexContext = xSemaphoreCreateMutex(); //Criação do Mutex
+//QueueHandle_t read_base = xQueueCreate(1, sizeof(uint8_t));
 
-static volatile uint8_t placer;
-static volatile uint8_t controler[SIZE];
+TaskHandle_t ReaderHandler = NULL; //Tarefa do leitor de QrCode
+TaskHandle_t MotorHandler = NULL; // Tarefa para giro do motor
+TaskHandle_t LazerHandler = NULL; // Tarefa para verificar se o objeto passou pelas caixas
+TaskHandle_t MoveHandler = NULL; // Tarefa de troca das caixas
+TaskHandle_t InteruptHandler = NULL; //Tarefa de Interrupção
+
+static volatile uint8_t placer; // Número que define o destino da caixa (A,B ou C)
+static volatile uint8_t controler[SIZE]; 
 static volatile bool pass;
 
 
