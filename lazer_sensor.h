@@ -18,7 +18,7 @@ void check_sistem_s1(void *args)
             else
             {
                 // Interupção do sistema
-                // xTaskNotifyGive(InteruptHandler);
+                set_eme_status(true);
             }
             
             xTaskNotifyGive(MoveHandler);
@@ -50,7 +50,7 @@ void check_sistem_s2(void *args)
             else
             {
                 // Interupção do sistema
-                // xTaskNotifyGive(InteruptHandler);
+                set_eme_status(true);
             }
             
             xTaskNotifyGive(MoveHandler);
@@ -80,7 +80,7 @@ void check_sistem_s3(void *args)
             }
             else
             {
-                // Interupção do sistema
+                set_eme_status(true);
                 // xTaskNotifyGive(InteruptHandler);
             }
             

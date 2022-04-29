@@ -62,12 +62,20 @@ void setup()
         NULL,           // Parametros
         1,           // Prioridade
         &MoveHandler);
- 
+
+        
+       xTaskCreate(
+        start_interrupt, // Função
+        "Mesa 1",        // Nome
+        100,             // Empilhamento -- Armazenamento de memória
+        NULL,               // Parametros
+        1,               // Prioridade
+        &InteruptHandler);
 
 /*   
 
         
-  
+
 
  
 
@@ -77,13 +85,7 @@ void setup()
     // Ajustar a task da mesa para que ela rode sem problemas
 
 
-    xTaskCreate(
-        start_interrupt, // Função
-        "Mesa 1",        // Nome
-        100,             // Empilhamento -- Armazenamento de memória
-        0,               // Parametros
-        2,               // Prioridade
-        &InteruptHandler);
+
 */
 /*
     xTaskCreate(

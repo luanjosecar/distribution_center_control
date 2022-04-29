@@ -5,25 +5,30 @@ void start_interrupt(void *args)
 
     for (;;)
     {
-        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-        xSemaphoreTake(MutexContext, portMAX_DELAY);
-        for (;;)
-        {
-            if (digitalRead(EME_B))
+       if (digitalRead(EME_B) or get_eme_status())
             {
-                xSemaphoreGive(MutexContext);
-                set_value(2);
-                xTaskNotifyGive(MotorHandler);
-                break;
-            }
-            else
-            {
+              xSemaphoreTake(MutexContext, portMAX_DELAY);
+              for(;;){
+                
                 digitalWrite(L_EME, HIGH);
                 vTaskDelay(500 / portTICK_PERIOD_MS); // Criar delay de leitura
 
                 digitalWrite(L_EME, LOW);
-                vTaskDelay(500 / portTICK_PERIOD_MS); // Criar delay de leitura
+                vTaskDelay(500 / portTICK_PERIOD_MS); // Criar delay de leitura  
+                Serial.println("Interupt ativo");
+                if (digitalRead(EME_B)){
+                  Serial.println("Exiting interrupt");
+                  
+                  vTaskDelay(1000 / portTICK_PERIOD_MS);
+                  break;
+                  }
+                
+                }
+                Serial.print("Starting motor for reset");
+                xSemaphoreGive(MutexContext);
+                set_eme_status(false);
+                xTaskNotifyGive(MotorHandler);
             }
         }
-    }
+    
 }

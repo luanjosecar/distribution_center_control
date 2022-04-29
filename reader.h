@@ -11,10 +11,6 @@ void leitor_area(void *args)
       bool base = get_flagpass();
        if (get_flagpass())
        {
-        if (digitalRead(READER_B)){
-          // Interupt
-          Serial.println("Area de interrupt");
-        }
         
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
         set_flagpass(false);

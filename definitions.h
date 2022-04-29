@@ -37,6 +37,7 @@ TaskHandle_t LazerSensor3 = NULL;
 
 static volatile uint8_t placer;
 static volatile bool pass;
+static volatile bool eme_state;
 static volatile uint8_t mesa_1;
 static volatile uint8_t mesa_2;
 
@@ -124,5 +125,20 @@ bool get_flagpass()
     xSemaphoreGive(MutexContext);
     return flag;
 }
-// Adicionar funções para a variavel de controle booleana
-// PASS
+
+void set_eme_status(bool state){
+    
+    xSemaphoreTake(MutexContext, portMAX_DELAY);
+    eme_state = state;
+    xSemaphoreGive(MutexContext);
+    
+}
+
+bool get_eme_status()
+{
+      boolean flag;
+    xSemaphoreTake(MutexContext, portMAX_DELAY);
+    flag = eme_state;
+    xSemaphoreGive(MutexContext);
+    return flag;
+}
