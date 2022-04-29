@@ -8,7 +8,7 @@ void check_sistem_s1(void *args)
     uint8_t param;
 
     param = get_value();
-    Serial.println(param);
+    
     if (digitalRead(PASS_1B))
     {
         if (param == 0)
@@ -61,7 +61,7 @@ void check_sistem_s3(void *args)
     uint8_t param;
 
     param = get_value();
-    Serial.println(param);
+    
     if (digitalRead(PASS_3B))
     {
         if (param == 0)
@@ -113,6 +113,7 @@ void validate_lazer(void *args)
         vTaskDelay(random(1000) / portTICK_PERIOD_MS);
 
         // Criar Task de novo sensor assim como a handler dele
+        set_flagpass(false);
         xTaskNotifyGive(MoveHandler);
     }
 }

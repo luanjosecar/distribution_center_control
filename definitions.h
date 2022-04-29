@@ -32,14 +32,12 @@ TaskHandle_t MoveHandler = NULL;
 TaskHandle_t InteruptHandler = NULL;
 
 static volatile uint8_t placer;
-static volatile bool is_processing;
 static volatile uint8_t controler[SIZE];
-static volatile boolean pass;
+static volatile bool pass;
 
 
 void stat_variables(){
   placer = -1;
-  is_processing = false;
   controler[0] =0;
   controler[1]=0;
   pass = false;
@@ -83,20 +81,20 @@ void reset_control(uint8_t place)
     xSemaphoreGive(MutexContext);
 }
 
-void set_flagpass(boolean flag)
+void set_flagpass(bool flag)
 {
     xSemaphoreTake(MutexContext, portMAX_DELAY);
     pass = flag;
     xSemaphoreGive(MutexContext);
 }
 
-boolean get_flagpass()
+bool get_flagpass()
 {
     boolean flag;
     xSemaphoreTake(MutexContext, portMAX_DELAY);
     flag = pass;
     xSemaphoreGive(MutexContext);
-    return pass;
+    return flag;
 }
 // Adicionar funções para a variavel de controle booleana
 // PASS

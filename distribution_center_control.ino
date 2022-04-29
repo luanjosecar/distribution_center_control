@@ -20,14 +20,14 @@ void setup()
     xTaskCreate(
         leitor_area, // Função
         "Leitor",    // Nome
-        100,         // Empilhamento -- Armazenamento de memória
+        150,         // Empilhamento -- Armazenamento de memória
         NULL,        // Parametros
         1,           // Prioridade
         &ReaderHandler);
 
    xTaskCreate(
         change_position, // Função
-        "Leitor 2",      // Nome
+        "Motor",      // Nome
         100,             // Empilhamento -- Armazenamento de memória
         NULL,            // Parametros
         1,               // Prioridade
@@ -35,11 +35,21 @@ void setup()
         
       xTaskCreate(
         validate_lazer, // Função
-        "Leitor 1",     // Nome
+        "Passagem",     // Nome
         100,            // Empilhamento -- Armazenamento de memória
         NULL,           // Parametros
         1,              // Prioridade
         &LazerHandler);
+        
+    xTaskCreate(
+        check_table, // Função
+        "Mesas",    // Nome
+        100,         // Empilhamento -- Armazenamento de memória
+        NULL,           // Parametros
+        1,           // Prioridade
+        &MoveHandler);
+ 
+
 /*    
 
 
@@ -47,13 +57,6 @@ void setup()
 
     // Ajustar a task da mesa para que ela rode sem problemas
 
-    xTaskCreate(
-        check_table, // Função
-        "Mesa 1",    // Nome
-        100,         // Empilhamento -- Armazenamento de memória
-        0,           // Parametros
-        1,           // Prioridade
-        &MoveHandler);
 
     xTaskCreate(
         start_interrupt, // Função

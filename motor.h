@@ -42,10 +42,11 @@ void change_position(void *args)
 
     //Serial.print("pass: ");
    // Serial.print(pass);
+   Serial.println("Passagem Motor");
    
-   vTaskDelay(1000 / portTICK_PERIOD_MS);
    
    xTaskNotifyGive(LazerHandler);
+   vTaskDelay(1000 / portTICK_PERIOD_MS);
     //delay(2000);
   }
 }
