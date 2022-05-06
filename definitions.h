@@ -23,6 +23,8 @@
 #define MOTOR 11   // Motor
 #define RELEASE 12 // Libera o sistema
 
+#define T_READER 1000 / portTICK_PERIOD_MS // delay
+
 SemaphoreHandle_t MutexContext = xSemaphoreCreateMutex();
 
 TaskHandle_t ReaderHandler = NULL;   // Tarefa do leitor de QrCode

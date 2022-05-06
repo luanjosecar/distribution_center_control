@@ -2,7 +2,6 @@
 #define READER_H
 
 // Funções
-//
 void leitor_area(void *args)
 {
 
@@ -43,5 +42,3 @@ void leitor_area(void *args)
 }
 
 #endif
-
-// Ajustar o sistema para ler apenas uma vez o qrcode

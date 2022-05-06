@@ -14,7 +14,7 @@ void verify_container_1(void *args)
         reset_mesa_1();
     }
 
-    vTaskDelete(TableSensor1);
+    vTaskDelete(TableSensor1); // deleta task para evitar overflow
 }
 
 void verify_container_2(void *args)
@@ -29,7 +29,7 @@ void verify_container_2(void *args)
         reset_mesa_2();
     }
 
-    vTaskDelete(TableSensor2);
+    vTaskDelete(TableSensor2); // deleta task para evitar overflow
 }
 
 void check_table(void *args)
@@ -38,7 +38,7 @@ void check_table(void *args)
     {
 
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-
+        // Cria taskas auxiliares
         xTaskCreate(
             verify_container_1, // Função
             "Mesa 1",           // Nome
@@ -54,21 +54,17 @@ void check_table(void *args)
             1,                  // Prioridade
             &TableSensor2);
 
-
         Serial.println("Passaram os carregamentos");
 
         set_value(-1);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
         Serial.println("Liberando leitor");
-        
+
         digitalWrite(RELEASE, HIGH);
-        vTaskDelay(10/portTICK_PERIOD_MS);
+        vTaskDelay(10 / portTICK_PERIOD_MS);
         digitalWrite(RELEASE, LOW);
-        
+
         xTaskNotifyGive(ReaderHandler);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
-
-// Verificar se o sistema está correto
-// Checar a forma de escrever a task para adapta-la ao correto

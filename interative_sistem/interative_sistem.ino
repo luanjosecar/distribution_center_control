@@ -5,11 +5,13 @@
 #define EME 5
 #define ACTIVATE 10
 
+
+int base;
 void print_menu()
 {
     Serial.println("------------------------------------");
     Serial.println("Escolha uma das opções para o sistema");
-    Serial.println("    0          1         2      9(interupt) ");
+    Serial.println("    1          2         3      9(interupt) ");
     Serial.println("------------------------------------");
 }
 
@@ -21,32 +23,37 @@ void setup()
 
 void loop()
 {
+    
     delay(3000);
     Serial.println("Caixa entrando no sistema");
     digitalWrite(READER, HIGH);
-    delay(1);
+    delay(10);
     digitalWrite(READER, LOW);
     delay(4000);
     print_menu();
-    int base;
+    
+    base = -1;
     while (Serial.available()== 0)
     {}
-        base = Serial.parseInt();
-    if (base == 0)
+    while (Serial.available()== 0)
+    {
+    base = Serial.parseInt();
+    }
+    if (base == 1)
     {
         Serial.println("Ativando sensor da área 0");
         digitalWrite(L1, HIGH);
         delay(10);
         digitalWrite(L1, LOW);
     }
-    if (base == 1)
+    if (base == 2)
     {
         Serial.println("Ativando sensor da área 1");
         digitalWrite(L2, HIGH);
         delay(10);
         digitalWrite(L2, LOW);
     }
-    if (base == 2)
+    if (base == 3)
     {
         Serial.print("Ativando sensor da área 2");
         digitalWrite(L3, HIGH);
@@ -62,7 +69,6 @@ void loop()
         Serial.println("Digite 8 para finaliza-la");
           while (Serial.available()== 0)
           {}
-          
           base = Serial.parseInt();
       }
       Serial.println("Reiniciando o Sistema");

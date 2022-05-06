@@ -18,16 +18,14 @@ void check_sistem_s1(void *args)
             else
             {
                 // Interupção do sistema
-                Serial.print("Interupção causada por erro no leitor 0");
+                Serial.println("Interupção causada por erro no leitor 0");
                 set_eme_status(true);
             }
-            
+
             xTaskNotifyGive(MoveHandler);
             vTaskDelay(2000 / portTICK_PERIOD_MS);
-            
-            
         }
-        //Serial.print(" Aguardando Leitor 1 ");
+        // Serial.print(" Aguardando Leitor 1 ");
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
@@ -51,16 +49,15 @@ void check_sistem_s2(void *args)
             else
             {
                 // Interupção do sistema
-                
-                Serial.print("Interupção causada por erro no leitor 1");
+
+                Serial.println("Interupção causada por erro no leitor 1");
                 set_eme_status(true);
             }
-            
+
             xTaskNotifyGive(MoveHandler);
             vTaskDelay(2000 / portTICK_PERIOD_MS);
-            
         }
-        //Serial.print(" Aguardando Leitor 2 ");
+        // Serial.print(" Aguardando Leitor 2 ");
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
@@ -82,55 +79,15 @@ void check_sistem_s3(void *args)
             }
             else
             {
-              
+
                 Serial.println("Interupção causada por erro no leitor 2");
                 set_eme_status(true);
-                
             }
-            
+
             xTaskNotifyGive(MoveHandler);
             vTaskDelay(2000 / portTICK_PERIOD_MS);
-            
         }
-        //Serial.print(" Aguardando Leitor 3 ");
+        // Serial.print(" Aguardando Leitor 3 ");
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
-}
-
-void validate_lazer(void *args)
-{
-    for (;;)
-    {
-        
-        Serial.println("Iniciando Sensores");
-        // ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-        xTaskCreate(
-            check_sistem_s1, // Função
-            "Leitor 1",      // Nome
-            80,              // Empilhamento -- Armazenamento de memória
-            NULL,            // Parametros
-            1,               // Prioridade
-            &LazerSensor1);
-        xTaskCreate(
-            check_sistem_s2, // Função
-            "Leitor 1",      // Nome
-            80,              // Empilhamento -- Armazenamento de memória
-            NULL,            // Parametros
-            1,               // Prioridade
-            &LazerSensor2);
-        xTaskCreate(
-            check_sistem_s3, // Função
-            "Leitor 1",      // Nome
-            80,              // Empilhamento -- Armazenamento de memória
-            NULL,            // Parametros
-            1,               // Prioridade
-            &LazerSensor3);
-        // print_data(false,"Verifica Sensores");
-        
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
-
-        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-
-        // Criar Task de novo sensor assim como a handler dele
-        }
 }
